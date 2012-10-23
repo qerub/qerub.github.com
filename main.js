@@ -15,7 +15,9 @@ var makeRepositoryListItem = (function (repo) {
 function main() {
     var ohloh = $("<a href='https://www.ohloh.net/accounts/484?ref=Detailed' target='_top'><img alt='Ohloh profile for Christoffer Sawicki' border='0' height='35' src='https://www.ohloh.net/accounts/484/widgets/account_detailed.gif' width='191' /></a>");
     var repoContainer;
-    var body = div(h1("qerub.github.com"), h2("My GitHub Repositories"), (repoContainer = div(em("Loading..."))), h2("Misc. Open Source Contributions"), div(p("See Ohloh: "), p(ohloh)));
+    var body = div(h1("qerub.github.com"), h2(a({
+        href: "http://vemod.net/"
+    }, "My Personal Website")), h2("My GitHub Repositories"), (repoContainer = div(em("Loading..."))), h2("Misc. Open Source Contributions"), div(p("See Ohloh: "), p(ohloh)));
     $(document.body).append(body);
     $.getJSON("https://api.github.com/users/qerub/repos?callback=?", function (response) {
         var repos = _.where(response.data, {

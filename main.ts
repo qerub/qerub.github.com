@@ -23,6 +23,7 @@ function main() {
   
   var body = div(
     h1("qerub.github.com"),
+    h2(a({ href: "http://vemod.net/" }, "My Personal Website")),
     h2("My GitHub Repositories"),
     (repoContainer = div(em("Loading..."))),
     h2("Misc. Open Source Contributions"),
