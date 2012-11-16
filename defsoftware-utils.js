@@ -31,7 +31,6 @@ var defsoftware;
         Utils.intersperse = intersperse;
     })(defsoftware.Utils || (defsoftware.Utils = {}));
     var Utils = defsoftware.Utils;
-
     (function (HTML) {
         function makeElement(tagName) {
             var args = [];
@@ -67,7 +66,5 @@ var defsoftware;
         HTML.ul = Utils.partial(makeElement, "ul");
     })(defsoftware.HTML || (defsoftware.HTML = {}));
     var HTML = defsoftware.HTML;
-
 })(defsoftware || (defsoftware = {}));
-
 //@ sourceMappingURL=defsoftware-utils.js.map
