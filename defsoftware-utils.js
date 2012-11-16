@@ -1,7 +1,7 @@
 var defsoftware;
 (function (defsoftware) {
     (function (Utils) {
-        function partial(f) {
+        Utils.partial = function (f) {
             var someArguments = [];
             for (var _i = 0; _i < (arguments.length - 1); _i++) {
                 someArguments[_i] = arguments[_i + 1];
@@ -13,8 +13,7 @@ var defsoftware;
                 }
                 return f.apply(f, someArguments.concat(moreArguments));
             }
-        }
-        Utils.partial = partial;
+        };
         function intersperse(collection, separator) {
             if(collection.length <= 1) {
                 return collection;

@@ -3,11 +3,9 @@
 
 module defsoftware {
   export module Utils {
-    export function partial(f, ...someArguments: any[]): (...args: any[]) => any {
-      return function (...moreArguments: any[]) {
-        return f.apply(f, someArguments.concat(moreArguments));
-      }
-    }
+    export var partial =
+      (f, ...someArguments: any[]) =>
+         (...moreArguments: any[]) => f.apply(f, someArguments.concat(moreArguments));
     
     export function intersperse(collection: any[], separator: any) {
       if (collection.length <= 1) {
