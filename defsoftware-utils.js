@@ -48,8 +48,7 @@ var defsoftware;
                 var attributes = args.shift();
                 $(element).attr(attributes);
             }
-            $(element).append(_.map(_.flatten(args), makeNode));
-            return element;
+            return $(element).append(_.map(_.flatten(args), makeNode));
         }
         HTML.makeElement = makeElement;
         HTML.a = Utils.partial(makeElement, "a");
