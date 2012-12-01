@@ -13,9 +13,6 @@ var strong = defsoftware.HTML.strong;
 var ul     = defsoftware.HTML.ul;
 // *yawn*
 
-var makeRepositoryListItem = (repo =>
-  li(a({ href: repo.homepage || repo.html_url }, strong(repo.name, ": "), repo.description)));
-
 function main() {
   var ohloh = $("<a href='https://www.ohloh.net/accounts/484?ref=Detailed' target='_top'><img alt='Ohloh profile for Christoffer Sawicki' border='0' height='35' src='https://www.ohloh.net/accounts/484/widgets/account_detailed.gif' width='191' /></a>");
   
@@ -32,9 +29,12 @@ function main() {
   
   $(document.body).append(body);
   
+  var makeRepoListItem = (repo =>
+    li(a({ href: repo.homepage || repo.html_url }, strong(repo.name, ": "), repo.description)));
+  
   $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
     var repos = _.where(response.data, { fork: false });
-    $(repoContainer).html(ul(_.map(repos, makeRepositoryListItem)));
+    $(repoContainer).html(ul(_.map(repos, makeRepoListItem)));
   });
 }
 
