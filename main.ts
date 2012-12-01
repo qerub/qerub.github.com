@@ -13,6 +13,8 @@ var strong = defsoftware.HTML.strong;
 var ul     = defsoftware.HTML.ul;
 // *yawn*
 
+var link = (content, href) => a({href: href}, content);
+
 function main() {
   var ohloh = $("<a href='https://www.ohloh.net/accounts/484?ref=Detailed' target='_top'><img alt='Ohloh profile for Christoffer Sawicki' border='0' height='35' src='https://www.ohloh.net/accounts/484/widgets/account_detailed.gif' width='191' /></a>");
   
@@ -22,10 +24,10 @@ function main() {
   
   var body = div(
     h1("qerub.github.com"),
-    h2(a({ href: "http://vemod.net/" }, "My Personal Website")),
-    h2("My GitHub Repositories"),
+    h2(link("My Personal Website", "http://vemod.net/")),
+    h2(link("My GitHub Repositories", "https://github.com/qerub")),
     (repoContainer = div(em().html("Loading&hellip;"))),
-    h2("My Gists"),
+    h2(link("My Gists", "https://gist.github.com/qerub")),
     (gistContainer = div(em().html("Loading&hellip;"))),
     h2("Misc. Open Source Contributions"),
     p("See Ohloh: ", ohloh)
@@ -34,7 +36,7 @@ function main() {
   $(document.body).append(body);
   
   var makeRepoListItem = (repo =>
-    li(a({ href: repo.homepage || repo.html_url }, strong(repo.name, ": "), repo.description)));
+    li(link([strong(repo.name, ": "), repo.description], repo.homepage || repo.html_url)));
   
   $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
     var repos = _.where(response.data, { fork: false });
@@ -42,7 +44,7 @@ function main() {
   });
   
   var makeGistListItem = (gist =>
-    li(a({ href: gist.html_url }, gist.description)));
+    li(link(gist.description, gist.html_url)));
   
   $.getJSON("https://api.github.com/users/qerub/gists?callback=?", response => {
     $(gistContainer).html(ul(_.map(response.data, makeGistListItem)));
