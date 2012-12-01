@@ -16,13 +16,15 @@ var ul     = defsoftware.HTML.ul;
 function main() {
   var ohloh = $("<a href='https://www.ohloh.net/accounts/484?ref=Detailed' target='_top'><img alt='Ohloh profile for Christoffer Sawicki' border='0' height='35' src='https://www.ohloh.net/accounts/484/widgets/account_detailed.gif' width='191' /></a>");
   
-  var repoContainer;
+  var repoContainer, gistContainer;
   
   var body = div(
     h1("qerub.github.com"),
     h2(a({ href: "http://vemod.net/" }, "My Personal Website")),
     h2("My GitHub Repositories"),
     (repoContainer = div(em("Loading..."))),
+    h2("My Gists"),
+    (gistContainer = div(em("Loading..."))),
     h2("Misc. Open Source Contributions"),
     div(p("See Ohloh: "), p(ohloh))
   );
@@ -35,6 +37,13 @@ function main() {
   $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
     var repos = _.where(response.data, { fork: false });
     $(repoContainer).html(ul(_.map(repos, makeRepoListItem)));
+  });
+  
+  var makeGistListItem = (gist =>
+    li(a({ href: gist.html_url }, gist.description)));
+  
+  $.getJSON("https://api.github.com/users/qerub/gists?callback=?", response => {
+    $(gistContainer).html(ul(_.map(response.data, makeGistListItem)));
   });
 }
 
