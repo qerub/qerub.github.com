@@ -22,9 +22,9 @@ function main() {
     h1("qerub.github.com"),
     h2(a({ href: "http://vemod.net/" }, "My Personal Website")),
     h2("My GitHub Repositories"),
-    (repoContainer = div(em("Loading..."))),
+    (repoContainer = div(em().html("Loading&hellip;"))),
     h2("My Gists"),
-    (gistContainer = div(em("Loading..."))),
+    (gistContainer = div(em().html("Loading&hellip;"))),
     h2("Misc. Open Source Contributions"),
     div(p("See Ohloh: "), p(ohloh))
   );

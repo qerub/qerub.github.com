@@ -12,7 +12,7 @@ function main() {
     var repoContainer, gistContainer;
     var body = div(h1("qerub.github.com"), h2(a({
         href: "http://vemod.net/"
-    }, "My Personal Website")), h2("My GitHub Repositories"), (repoContainer = div(em("Loading..."))), h2("My Gists"), (gistContainer = div(em("Loading..."))), h2("Misc. Open Source Contributions"), div(p("See Ohloh: "), p(ohloh)));
+    }, "My Personal Website")), h2("My GitHub Repositories"), (repoContainer = div(em().html("Loading&hellip;"))), h2("My Gists"), (gistContainer = div(em().html("Loading&hellip;"))), h2("Misc. Open Source Contributions"), div(p("See Ohloh: "), p(ohloh)));
     $(document.body).append(body);
     var makeRepoListItem = (function (repo) {
         return li(a({
