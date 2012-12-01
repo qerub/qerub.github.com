@@ -337,6 +337,8 @@ interface JQuery {
     hasClass(className: string): bool;
 
     html(htmlString: string): JQuery;
+    html(htmlElement: Element): JQuery;
+    html(jquery: JQuery): JQuery;
     html(): string;
 
     prop(propertyName: string): string;
