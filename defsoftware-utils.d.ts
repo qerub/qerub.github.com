@@ -1,5 +1,5 @@
 /// <reference path="extdefs/jquery.d.ts" />
-/// <reference path="extdefs/underscore.browser.d.ts" />
+/// <reference path="extdefs/sugar.d.ts" />
 module defsoftware {
     module Utils {
         var partial: (f: any, ...someArguments: any[]) => (...moreArguments: any[]) => any;

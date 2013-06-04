@@ -1,5 +1,4 @@
 /// <reference path="extdefs/jquery.d.ts" />
-/// <reference path="extdefs/underscore.browser.d.ts" />
 /// <reference path="defsoftware-utils.d.ts" />
 
 var a      = defsoftware.HTML.elementMaker("a");
@@ -39,15 +38,15 @@ function main() {
     li(link([strong(repo.name, ": "), repo.description], repo.homepage || repo.html_url)));
   
   $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
-    var repos = _.where(response.data, { fork: false });
-    $(repoContainer).html(ul(_.map(repos, makeRepoListItem)));
+    var repos = response.data.filter(x => !x.fork);
+    $(repoContainer).html(ul(repos.map(makeRepoListItem)));
   });
   
   var makeGistListItem = (gist =>
     li(link(gist.description, gist.html_url)));
   
   $.getJSON("https://api.github.com/users/qerub/gists?callback=?", response => {
-    $(gistContainer).html(ul(_.map(response.data, makeGistListItem)));
+    $(gistContainer).html(ul(response.data.map(makeGistListItem)));
   });
 }
 

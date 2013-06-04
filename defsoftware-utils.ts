@@ -1,5 +1,5 @@
 /// <reference path="extdefs/jquery.d.ts" />
-/// <reference path="extdefs/underscore.browser.d.ts" />
+/// <reference path="extdefs/sugar.d.ts" />
 
 module defsoftware {
   export module Utils {
@@ -13,8 +13,8 @@ module defsoftware {
       }
       else {
         var xs = [];
-        xs.push(_.first(collection));
-        _.rest(collection).forEach(function (x) {
+        xs.push(collection[0]);
+        collection.slice(1).forEach(function (x) {
           xs.push(separator);
           xs.push(x);
         });
@@ -41,7 +41,7 @@ module defsoftware {
         $(element).attr(attributes);
       }
 
-      return $(element).append(_.map(_.flatten(args), makeNode));
+      return $(element).append(args.flatten().map(makeNode));
     }
     
     export var elementMaker = (tagName: string) => Utils.partial(makeElement, tagName);

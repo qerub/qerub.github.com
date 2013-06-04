@@ -19,8 +19,8 @@ var defsoftware;
                 return collection;
             } else {
                 var xs = [];
-                xs.push(_.first(collection));
-                _.rest(collection).forEach(function (x) {
+                xs.push(collection[0]);
+                collection.slice(1).forEach(function (x) {
                     xs.push(separator);
                     xs.push(x);
                 });
@@ -48,7 +48,7 @@ var defsoftware;
                 var attributes = args.shift();
                 $(element).attr(attributes);
             }
-            return $(element).append(_.map(_.flatten(args), makeNode));
+            return $(element).append(args.flatten().map(makeNode));
         }
         HTML.makeElement = makeElement;
         HTML.elementMaker = function (tagName) {

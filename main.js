@@ -25,16 +25,16 @@ function main() {
         ], repo.homepage || repo.html_url));
     });
     $.getJSON("https://api.github.com/users/qerub/repos?callback=?", function (response) {
-        var repos = _.where(response.data, {
-            fork: false
+        var repos = response.data.filter(function (x) {
+            return !x.fork;
         });
-        $(repoContainer).html(ul(_.map(repos, makeRepoListItem)));
+        $(repoContainer).html(ul(repos.map(makeRepoListItem)));
     });
     var makeGistListItem = (function (gist) {
         return li(link(gist.description, gist.html_url));
     });
     $.getJSON("https://api.github.com/users/qerub/gists?callback=?", function (response) {
-        $(gistContainer).html(ul(_.map(response.data, makeGistListItem)));
+        $(gistContainer).html(ul(response.data.map(makeGistListItem)));
     });
 }
 $(main);
