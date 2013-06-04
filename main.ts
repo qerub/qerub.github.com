@@ -2,15 +2,15 @@
 /// <reference path="extdefs/underscore.browser.d.ts" />
 /// <reference path="defsoftware-utils.d.ts" />
 
-var a      = defsoftware.HTML.a;
-var div    = defsoftware.HTML.div;
-var em     = defsoftware.HTML.em;
-var h1     = defsoftware.HTML.h1;
-var h2     = defsoftware.HTML.h2;
-var li     = defsoftware.HTML.li;
-var p      = defsoftware.HTML.p;
-var strong = defsoftware.HTML.strong;
-var ul     = defsoftware.HTML.ul;
+var a      = defsoftware.HTML.elementMaker("a");
+var div    = defsoftware.HTML.elementMaker("div");
+var em     = defsoftware.HTML.elementMaker("em");
+var h1     = defsoftware.HTML.elementMaker("h1");
+var h2     = defsoftware.HTML.elementMaker("h2");
+var li     = defsoftware.HTML.elementMaker("li");
+var p      = defsoftware.HTML.elementMaker("p");
+var strong = defsoftware.HTML.elementMaker("strong");
+var ul     = defsoftware.HTML.elementMaker("ul");
 // *yawn*
 
 var link = (content, href) => a({href: href}, content);

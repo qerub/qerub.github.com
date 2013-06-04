@@ -12,7 +12,7 @@ var defsoftware;
                     moreArguments[_i] = arguments[_i + 0];
                 }
                 return f.apply(f, someArguments.concat(moreArguments));
-            }
+            };
         };
         function intersperse(collection, separator) {
             if(collection.length <= 1) {
@@ -51,17 +51,9 @@ var defsoftware;
             return $(element).append(_.map(_.flatten(args), makeNode));
         }
         HTML.makeElement = makeElement;
-        HTML.a = Utils.partial(makeElement, "a");
-        HTML.button = Utils.partial(makeElement, "button");
-        HTML.div = Utils.partial(makeElement, "div");
-        HTML.em = Utils.partial(makeElement, "em");
-        HTML.h1 = Utils.partial(makeElement, "h1");
-        HTML.h2 = Utils.partial(makeElement, "h2");
-        HTML.h3 = Utils.partial(makeElement, "h3");
-        HTML.li = Utils.partial(makeElement, "li");
-        HTML.p = Utils.partial(makeElement, "p");
-        HTML.strong = Utils.partial(makeElement, "strong");
-        HTML.ul = Utils.partial(makeElement, "ul");
+        HTML.elementMaker = function (tagName) {
+            return Utils.partial(makeElement, tagName);
+        };
     })(defsoftware.HTML || (defsoftware.HTML = {}));
     var HTML = defsoftware.HTML;
 })(defsoftware || (defsoftware = {}));

@@ -7,16 +7,6 @@ module defsoftware {
     }
     module HTML {
         function makeElement(tagName: string, ...args: any[]): JQuery;
-        var a: (...args: any[]) => JQuery;
-        var button: (...args: any[]) => JQuery;
-        var div: (...args: any[]) => JQuery;
-        var em: (...args: any[]) => JQuery;
-        var h1: (...args: any[]) => JQuery;
-        var h2: (...args: any[]) => JQuery;
-        var h3: (...args: any[]) => JQuery;
-        var li: (...args: any[]) => JQuery;
-        var p: (...args: any[]) => JQuery;
-        var strong: (...args: any[]) => JQuery;
-        var ul: (...args: any[]) => JQuery;
+        var elementMaker: (tagName: string) => (...moreArguments: any[]) => any;
     }
 }

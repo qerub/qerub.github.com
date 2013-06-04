@@ -43,17 +43,7 @@ module defsoftware {
 
       return $(element).append(_.map(_.flatten(args), makeNode));
     }
-
-    export var a      : (...args: any[]) => JQuery = Utils.partial(makeElement, "a")    
-    export var button : (...args: any[]) => JQuery = Utils.partial(makeElement, "button")
-    export var div    : (...args: any[]) => JQuery = Utils.partial(makeElement, "div")   
-    export var em     : (...args: any[]) => JQuery = Utils.partial(makeElement, "em")    
-    export var h1     : (...args: any[]) => JQuery = Utils.partial(makeElement, "h1")
-    export var h2     : (...args: any[]) => JQuery = Utils.partial(makeElement, "h2")
-    export var h3     : (...args: any[]) => JQuery = Utils.partial(makeElement, "h3")
-    export var li     : (...args: any[]) => JQuery = Utils.partial(makeElement, "li")    
-    export var p      : (...args: any[]) => JQuery = Utils.partial(makeElement, "p")
-    export var strong : (...args: any[]) => JQuery = Utils.partial(makeElement, "strong")
-    export var ul     : (...args: any[]) => JQuery = Utils.partial(makeElement, "ul")    
+    
+    export var elementMaker = (tagName: string) => Utils.partial(makeElement, tagName);
   }
 }

@@ -1,12 +1,12 @@
-var a = this.defsoftware.HTML.a;
-var div = this.defsoftware.HTML.div;
-var em = this.defsoftware.HTML.em;
-var h1 = this.defsoftware.HTML.h1;
-var h2 = this.defsoftware.HTML.h2;
-var li = this.defsoftware.HTML.li;
-var p = this.defsoftware.HTML.p;
-var strong = this.defsoftware.HTML.strong;
-var ul = this.defsoftware.HTML.ul;
+var a = defsoftware.HTML.elementMaker("a");
+var div = defsoftware.HTML.elementMaker("div");
+var em = defsoftware.HTML.elementMaker("em");
+var h1 = defsoftware.HTML.elementMaker("h1");
+var h2 = defsoftware.HTML.elementMaker("h2");
+var li = defsoftware.HTML.elementMaker("li");
+var p = defsoftware.HTML.elementMaker("p");
+var strong = defsoftware.HTML.elementMaker("strong");
+var ul = defsoftware.HTML.elementMaker("ul");
 var link = function (content, href) {
     return a({
         href: href
