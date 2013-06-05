@@ -12,7 +12,7 @@ var defsoftware;
                     moreArguments[_i] = arguments[_i + 0];
                 }
                 return f.apply(f, someArguments.concat(moreArguments));
-            };
+            }
         };
         function intersperse(collection, separator) {
             if(collection.length <= 1) {

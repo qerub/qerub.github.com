@@ -1,12 +1,12 @@
-var a = defsoftware.HTML.elementMaker("a");
-var div = defsoftware.HTML.elementMaker("div");
-var em = defsoftware.HTML.elementMaker("em");
-var h1 = defsoftware.HTML.elementMaker("h1");
-var h2 = defsoftware.HTML.elementMaker("h2");
-var li = defsoftware.HTML.elementMaker("li");
-var p = defsoftware.HTML.elementMaker("p");
-var strong = defsoftware.HTML.elementMaker("strong");
-var ul = defsoftware.HTML.elementMaker("ul");
+var a = this.defsoftware.HTML.elementMaker("a");
+var div = this.defsoftware.HTML.elementMaker("div");
+var em = this.defsoftware.HTML.elementMaker("em");
+var h1 = this.defsoftware.HTML.elementMaker("h1");
+var h2 = this.defsoftware.HTML.elementMaker("h2");
+var li = this.defsoftware.HTML.elementMaker("li");
+var p = this.defsoftware.HTML.elementMaker("p");
+var strong = this.defsoftware.HTML.elementMaker("strong");
+var ul = this.defsoftware.HTML.elementMaker("ul");
 var link = function (content, href) {
     return a({
         href: href
@@ -22,7 +22,7 @@ function main() {
         return li(link([
             strong(repo.name, ": "), 
             repo.description
-        ], repo.homepage || repo.html_url));
+        ], repo.html_url));
     });
     $.getJSON("https://api.github.com/users/qerub/repos?callback=?", function (response) {
         var repos = response.data.filter(function (x) {
