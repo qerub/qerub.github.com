@@ -35,7 +35,7 @@ function main() {
   $(document.body).append(body);
   
   var makeRepoListItem = (repo =>
-    li(link([strong(repo.name, ": "), repo.description], repo.homepage || repo.html_url)));
+    li(link([strong(repo.name, ": "), repo.description], repo.html_url)));
   
   $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
     var repos = response.data.filter(x => !x.fork);
