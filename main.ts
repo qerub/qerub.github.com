@@ -25,9 +25,9 @@ function main() {
     h1("qerub.github.com"),
     h2(link("My Personal Website", "http://vemod.net/")),
     h2(link("My GitHub Repositories", "https://github.com/qerub")),
-    (repoContainer = div(em().html("Loading&hellip;"))),
+    (repoContainer = p(em().html("Loading&hellip;"))),
     h2(link("My Gists", "https://gist.github.com/qerub")),
-    (gistContainer = div(em().html("Loading&hellip;"))),
+    (gistContainer = p(em().html("Loading&hellip;"))),
     h2("Misc. Open Source Contributions"),
     p("See Ohloh: ", ohloh)
   );
