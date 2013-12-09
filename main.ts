@@ -5,7 +5,6 @@ var a      = defsoftware.HTML.elementMaker("a");
 var div    = defsoftware.HTML.elementMaker("div");
 var em     = defsoftware.HTML.elementMaker("em");
 var h1     = defsoftware.HTML.elementMaker("h1");
-var h2     = defsoftware.HTML.elementMaker("h2");
 var li     = defsoftware.HTML.elementMaker("li");
 var p      = defsoftware.HTML.elementMaker("p");
 var strong = defsoftware.HTML.elementMaker("strong");
@@ -29,12 +28,11 @@ function main() {
   var repoContainer, gistContainer;
   
   var body = div(
-    h1("qerub.github.com"),
-    h2(link("My Personal Website", "http://vemod.net/")),
-    h2(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")),
-    h2(link("My GitHub Repositories", "https://github.com/qerub")),
+    h1(link("My Personal Website", "http://vemod.net/")),
+    h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")),
+    h1(link("My GitHub Repositories", "https://github.com/qerub")),
     (repoContainer = p(em().html("Loading&hellip;"))),
-    h2(link("My Gists", "https://gist.github.com/qerub")),
+    h1(link("My Gists", "https://gist.github.com/qerub")),
     (gistContainer = p(em().html("Loading&hellip;")))
   );
   
