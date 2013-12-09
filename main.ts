@@ -14,6 +14,17 @@ var ul     = defsoftware.HTML.elementMaker("ul");
 
 var link = (content, href) => a({href: href}, content);
 
+function GitHubAPI(path: string, callback) {
+  $.getJSON("https://api.github.com/"+path+"?callback=?", response => {
+    if (response.meta.status == 200) {
+      callback(response.data);
+    }
+    else {
+      throw response.data.message;
+    }
+  });
+}
+
 function main() {
   var ohloh = $("<a href='https://www.ohloh.net/accounts/484?ref=Detailed' target='_top'><img alt='Ohloh profile for Christoffer Sawicki' border='0' height='35' src='https://www.ohloh.net/accounts/484/widgets/account_detailed.gif' width='191' /></a>");
   
@@ -37,16 +48,16 @@ function main() {
   var makeRepoListItem = (repo =>
     li(link([strong(repo.name, ": "), repo.description], repo.html_url)));
   
-  $.getJSON("https://api.github.com/users/qerub/repos?callback=?", response => {
-    var repos = response.data.filter(x => !x.fork);
+  GitHubAPI("users/qerub/repos", data => {
+    var repos = data.filter(x => !x.fork);
     $(repoContainer).html(ul(repos.map(makeRepoListItem)));
   });
   
   var makeGistListItem = (gist =>
     li(link(gist.description, gist.html_url)));
   
-  $.getJSON("https://api.github.com/users/qerub/gists?callback=?", response => {
-    $(gistContainer).html(ul(response.data.map(makeGistListItem)));
+  GitHubAPI("users/qerub/gists", data => {
+    $(gistContainer).html(ul(data.map(makeGistListItem)));
   });
 }
 
