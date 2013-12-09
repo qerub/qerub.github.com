@@ -1,7 +1,30 @@
+body {
+  background-color: #252525;
+  color: #D6D6D6;
+  text-shadow: black 0 1px 2px;
+}
+
+a {
+  -moz-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  color: #b7d1fb;
+}
+
+a:hover {
+  color: #85b5fe;
+}
+
+h1, h2, ul, p {
+  padding: 0 4px;
+}
+
 * {
   font-family: "Menlo", "Courier New", monospace;
   font-size: 11px;
-  line-height: 14px;
+  line-height: 16px;
 }
 
 ul {
