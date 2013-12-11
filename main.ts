@@ -13,16 +13,12 @@ var ul     = defsoftware.HTML.elementMaker("ul");
 
 var link = (content, href) => a({href: href}, content);
 
-function GitHubAPI(path: string, callback) {
-  $.getJSON("https://api.github.com/"+path+"?callback=?", response => {
-    if (response.meta.status == 200) {
-      callback(response.data);
-    }
-    else {
-      throw response.data.message;
-    }
-  });
-}
+var GitHubAPI = (path: string): JQueryPromise<any> =>
+  $.getJSON("https://api.github.com/"+path+"?callback=?").then(response =>
+    (response.meta.status == 200)
+      ? $.Deferred().resolve(response.data)
+      : $.Deferred().reject (response.data.message)
+  );
 
 function main() {
   var repoContainer, gistContainer;
@@ -41,17 +37,19 @@ function main() {
   var makeRepoListItem = (repo =>
     li(link([strong(repo.name, ": "), repo.description], repo.html_url)));
   
-  GitHubAPI("users/qerub/repos", data => {
-    var repos = data.filter(x => !x.fork);
-    $(repoContainer).html(ul(repos.map(makeRepoListItem)));
-  });
+  GitHubAPI("users/qerub/repos")
+    .then(data => {
+      var repos = data.filter(x => !x.fork);
+      $(repoContainer).html(ul(repos.map(makeRepoListItem)));
+    })
+    .fail(message => $(repoContainer).text("Error: " + message));
   
   var makeGistListItem = (gist =>
     li(link(gist.description, gist.html_url)));
   
-  GitHubAPI("users/qerub/gists", data => {
-    $(gistContainer).html(ul(data.map(makeGistListItem)));
-  });
+  GitHubAPI("users/qerub/gists")
+    .then(data    => $(gistContainer).html(ul(data.map(makeGistListItem))))
+    .fail(message => $(gistContainer).text("Error: " + message));
 }
 
 $(main);
