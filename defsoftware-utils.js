@@ -1,3 +1,5 @@
+/// <reference path="extdefs/jquery.d.ts" />
+/// <reference path="extdefs/sugar.d.ts" />
 var defsoftware;
 (function (defsoftware) {
     (function (Utils) {
@@ -12,10 +14,11 @@ var defsoftware;
                     moreArguments[_i] = arguments[_i + 0];
                 }
                 return f.apply(f, someArguments.concat(moreArguments));
-            }
+            };
         };
+
         function intersperse(collection, separator) {
-            if(collection.length <= 1) {
+            if (collection.length <= 1) {
                 return collection;
             } else {
                 var xs = [];
@@ -30,6 +33,7 @@ var defsoftware;
         Utils.intersperse = intersperse;
     })(defsoftware.Utils || (defsoftware.Utils = {}));
     var Utils = defsoftware.Utils;
+
     (function (HTML) {
         function makeElement(tagName) {
             var args = [];
@@ -37,24 +41,28 @@ var defsoftware;
                 args[_i] = arguments[_i + 1];
             }
             function makeNode(x) {
-                if(typeof (x) == "string") {
+                if (typeof (x) == "string") {
                     return document.createTextNode(x);
                 } else {
                     return x;
                 }
             }
+
             var element = document.createElement(tagName);
-            if(args.length > 0 && $.isPlainObject(args[0])) {
+
+            if (args.length > 0 && $.isPlainObject(args[0])) {
                 var attributes = args.shift();
                 $(element).attr(attributes);
             }
+
             return $(element).append(args.flatten().map(makeNode));
         }
         HTML.makeElement = makeElement;
+
         HTML.elementMaker = function (tagName) {
             return Utils.partial(makeElement, tagName);
         };
     })(defsoftware.HTML || (defsoftware.HTML = {}));
     var HTML = defsoftware.HTML;
 })(defsoftware || (defsoftware = {}));
-//@ sourceMappingURL=defsoftware-utils.js.map
+//# sourceMappingURL=defsoftware-utils.js.map
