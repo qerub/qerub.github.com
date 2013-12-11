@@ -1,20 +1,19 @@
 body {
-  background-color: #252525;
-  color: #D6D6D6;
-  text-shadow: black 0 1px 2px;
+  background-color: #303030;
+  color: #969696;
 }
 
 a {
-  -moz-transition: color 0.5s ease;
-  -ms-transition: color 0.5s ease;
-  -o-transition: color 0.5s ease;
-  -webkit-transition: color 0.5s ease;
-  transition: color 0.5s ease;
-  color: #b7d1fb;
+  color: #FEDF4C;
+  text-decoration: none;
+  text-shadow: -1px -1px 0 #5A3703,
+                1px -1px 0 #5A3703,
+               -1px  1px 0 #5A3703,
+                1px  1px 0 #5A3703;
 }
 
 a:hover {
-  color: #85b5fe;
+  text-decoration: underline;
 }
 
 h1, ul, p {
