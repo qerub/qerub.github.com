@@ -25,7 +25,7 @@ function main() {
   
   var body = div(
     h1(link("My Personal Website", "http://qerub.se/")),
-    h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")),
+    h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")),
     h1(link("My GitHub Repositories", "https://github.com/qerub")),
     (repoContainer = p(em().html("Loading&hellip;"))),
     h1(link("My Gists", "https://gist.github.com/qerub")),
