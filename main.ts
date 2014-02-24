@@ -24,7 +24,7 @@ function main() {
   var repoContainer, gistContainer;
   
   var body = div(
-    h1(link("My Personal Website", "http://vemod.net/")),
+    h1(link("My Personal Website", "http://qerub.se/")),
     h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")),
     h1(link("My GitHub Repositories", "https://github.com/qerub")),
     (repoContainer = p(em().html("Loading&hellip;"))),

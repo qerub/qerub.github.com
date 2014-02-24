@@ -23,7 +23,7 @@ var GitHubAPI = function (path) {
 function main() {
     var repoContainer, gistContainer;
 
-    var body = div(h1(link("My Personal Website", "http://vemod.net/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em().html("Loading&hellip;"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em().html("Loading&hellip;"))));
+    var body = div(h1(link("My Personal Website", "http://qerub.se/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub?ref=Detailed")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em().html("Loading&hellip;"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em().html("Loading&hellip;"))));
 
     $(document.body).append(body);
 
