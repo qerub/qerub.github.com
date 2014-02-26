@@ -1,1 +1,1 @@
-http://qerub.github.com/
+http://qerub.github.io/
