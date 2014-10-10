@@ -20,6 +20,9 @@ var GitHubAPI = (path: string): JQueryPromise<any> =>
       : $.Deferred().reject (response.data.message)
   );
 
+var truncate = (s: string, n: number) =>
+  (s.length > n) ? s.slice(0, n - 1) + "…" : s
+
 function main() {
   var repoContainer, gistContainer;
   
@@ -45,7 +48,7 @@ function main() {
     .fail(message => $(repoContainer).text("Error: " + message));
   
   var makeGistListItem = (gist =>
-    li(link(gist.description, gist.html_url)));
+    li(link(truncate(gist.description, 100), gist.html_url)));
   
   GitHubAPI("users/qerub/gists")
     .then(data    => $(gistContainer).html(ul(data.map(makeGistListItem))))

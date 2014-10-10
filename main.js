@@ -11,6 +11,7 @@ var ul = defsoftware.HTML.elementMaker("ul");
 // *yawn*
 var link = function (content, href) { return a({ href: href }, content); };
 var GitHubAPI = function (path) { return $.getJSON("https://api.github.com/" + path + "?callback=?").then(function (response) { return (response.meta.status == 200) ? $.Deferred().resolve(response.data) : $.Deferred().reject(response.data.message); }); };
+var truncate = function (s, n) { return (s.length > n) ? s.slice(0, n - 1) + "…" : s; };
 function main() {
     var repoContainer, gistContainer;
     var body = div(h1(link("My Personal Website", "http://qerub.se/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em().html("Loading&hellip;"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em().html("Loading&hellip;"))));
@@ -20,7 +21,7 @@ function main() {
         var repos = data.filter(function (x) { return !x.fork; });
         $(repoContainer).html(ul(repos.map(makeRepoListItem)));
     }).fail(function (message) { return $(repoContainer).text("Error: " + message); });
-    var makeGistListItem = (function (gist) { return li(link(gist.description, gist.html_url)); });
+    var makeGistListItem = (function (gist) { return li(link(truncate(gist.description, 100), gist.html_url)); });
     GitHubAPI("users/qerub/gists").then(function (data) { return $(gistContainer).html(ul(data.map(makeGistListItem))); }).fail(function (message) { return $(gistContainer).text("Error: " + message); });
 }
 $(main);
