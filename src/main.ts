@@ -1,5 +1,5 @@
-/// <reference path="extdefs/jquery.d.ts" />
-/// <reference path="defsoftware-utils.d.ts" />
+/// <reference path="../extdefs/jquery.d.ts" />
+/// <reference path="defsoftware-utils.ts" />
 
 var a      = defsoftware.HTML.elementMaker("a");
 var div    = defsoftware.HTML.elementMaker("div");
