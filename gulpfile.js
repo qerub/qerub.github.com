@@ -11,4 +11,9 @@ gulp.task('copy-static-files', function () {
 
 gulp.task('build', ['compile-typescript', 'copy-static-files']);
 
+gulp.task('deploy', ['build'], function () {
+  var gitHubPages = require('gulp-gh-pages')({branch: 'master'});
+  return gulp.src('dist/**/*').pipe(gitHubPages);
+});
+
 gulp.task('default', ['build']);
