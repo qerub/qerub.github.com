@@ -1,5 +1,5 @@
-/// <reference path="../extdefs/jquery.d.ts" />
-/// <reference path="../extdefs/sugar.d.ts" />
+/// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
+/// <reference path="../DefinitelyTyped/sugar/sugar.d.ts" />
 
 module defsoftware {
   export module Utils {
