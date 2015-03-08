@@ -14,7 +14,7 @@ var GitHubAPI = function (path) { return $.getJSON("https://api.github.com/" + p
 var truncate = function (s, n) { return (s.length > n) ? s.slice(0, n - 1) + "…" : s; };
 function main() {
     var repoContainer, gistContainer;
-    var body = div(h1(link("My Personal Website", "http://qerub.se/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em().html("Loading&hellip;"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em().html("Loading&hellip;"))));
+    var body = div(h1(link("My Personal Website", "http://qerub.se/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em("Loading…"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em("Loading…"))));
     $(document.body).append(body);
     var makeRepoListItem = (function (repo) { return li(link([strong(repo.name, ": "), repo.description], repo.html_url)); });
     GitHubAPI("users/qerub/repos").then(function (data) {
