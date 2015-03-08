@@ -1,0 +1,42 @@
+body {
+  background-color: #0E3955;
+  color: #0F7292;
+}
+
+a {
+  color: #1AB1E1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+h1, ul, p {
+  padding: 0 4px;
+}
+
+* {
+  font-family: "Menlo", "Monaco", monospace;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1:before {
+  content: "# ";
+}
+
+ul li {
+  margin-left: 16px;
+}
+
+ul li:before {
+  content: "* ";
+}
