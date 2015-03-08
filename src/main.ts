@@ -30,9 +30,9 @@ function main() {
     h1(link("My Personal Website", "http://qerub.se/")),
     h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")),
     h1(link("My GitHub Repositories", "https://github.com/qerub")),
-    (repoContainer = p(em().html("Loading&hellip;"))),
+    (repoContainer = p(em("Loading…"))),
     h1(link("My Gists", "https://gist.github.com/qerub")),
-    (gistContainer = p(em().html("Loading&hellip;")))
+    (gistContainer = p(em("Loading…")))
   );
   
   $(document.body).append(body);
