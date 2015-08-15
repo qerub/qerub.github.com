@@ -2,7 +2,12 @@ var gulp = require('gulp');
 
 gulp.task('compile-typescript', function () {
   var ts = require('gulp-typescript');
-  return gulp.src('src/*.ts').pipe(ts()).js.pipe(gulp.dest('dist'));
+  var babel = require('gulp-babel');
+  return gulp.src(['src/*.ts', 'src/*.tsx'])
+             .pipe(ts({typescript: require('typescript'), jsx: "preserve"}))
+             .js
+             .pipe(babel())
+             .pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy-static-files', function () {
