@@ -1,5 +1,7 @@
 /// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
 /// <reference path="../DefinitelyTyped/sugar/sugar.d.ts" />
+"use strict";
+
 var defsoftware;
 (function (defsoftware) {
     var Utils;
@@ -20,8 +22,7 @@ var defsoftware;
         function intersperse(collection, separator) {
             if (collection.length <= 1) {
                 return collection;
-            }
-            else {
+            } else {
                 var xs = [];
                 xs.push(collection[0]);
                 collection.slice(1).forEach(function (x) {
@@ -41,10 +42,9 @@ var defsoftware;
                 args[_i - 1] = arguments[_i];
             }
             function makeNode(x) {
-                if (typeof (x) == "string") {
+                if (typeof x == "string") {
                     return document.createTextNode(x);
-                }
-                else {
+                } else {
                     return x;
                 }
             }
@@ -56,6 +56,8 @@ var defsoftware;
             return $(element).append(args.flatten().map(makeNode));
         }
         HTML.makeElement = makeElement;
-        HTML.elementMaker = function (tagName) { return Utils.partial(makeElement, tagName); };
+        HTML.elementMaker = function (tagName) {
+            return Utils.partial(makeElement, tagName);
+        };
     })(HTML = defsoftware.HTML || (defsoftware.HTML = {}));
 })(defsoftware || (defsoftware = {}));

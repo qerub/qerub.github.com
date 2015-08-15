@@ -1,27 +1,126 @@
 /// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
 /// <reference path="defsoftware-utils.ts" />
-var a = defsoftware.HTML.elementMaker("a");
-var div = defsoftware.HTML.elementMaker("div");
-var em = defsoftware.HTML.elementMaker("em");
-var h1 = defsoftware.HTML.elementMaker("h1");
-var li = defsoftware.HTML.elementMaker("li");
-var p = defsoftware.HTML.elementMaker("p");
-var strong = defsoftware.HTML.elementMaker("strong");
-var ul = defsoftware.HTML.elementMaker("ul");
-// *yawn*
-var link = function (content, href) { return a({ href: href }, content); };
-var GitHubAPI = function (path) { return $.getJSON("https://api.github.com/" + path + "?callback=?").then(function (response) { return (response.meta.status == 200) ? $.Deferred().resolve(response.data) : $.Deferred().reject(response.data.message); }); };
-var truncate = function (s, n) { return (s.length > n) ? s.slice(0, n - 1) + "…" : s; };
+/** @jsx defsoftware.HTML.makeElement */
+"use strict";
+
+var GitHubAPI = function GitHubAPI(path) {
+    return $.getJSON("https://api.github.com/" + path + "?callback=?").then(function (response) {
+        return response.meta.status == 200 ? $.Deferred().resolve(response.data) : $.Deferred().reject(response.data.message);
+    });
+};
+var truncate = function truncate(s, n) {
+    return s.length > n ? s.slice(0, n - 1) + "…" : s;
+};
 function main() {
     var repoContainer, gistContainer;
-    var body = div(h1(link("My Personal Website", "http://qerub.se/")), h1(link("My Page on Ohloh", "https://www.ohloh.net/accounts/Qerub/positions")), h1(link("My GitHub Repositories", "https://github.com/qerub")), (repoContainer = p(em("Loading…"))), h1(link("My Gists", "https://gist.github.com/qerub")), (gistContainer = p(em("Loading…"))));
+    var body = defsoftware.HTML.makeElement(
+        "div",
+        null,
+        defsoftware.HTML.makeElement(
+            "h1",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: "http://qerub.se/" },
+                "My Personal Website"
+            )
+        ),
+        defsoftware.HTML.makeElement(
+            "h1",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: "https://www.ohloh.net/accounts/Qerub/positions" },
+                "My Page on Ohloh"
+            )
+        ),
+        defsoftware.HTML.makeElement(
+            "h1",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: "https://github.com/qerub" },
+                "My GitHub Repositories"
+            )
+        ),
+        repoContainer = defsoftware.HTML.makeElement(
+            "p",
+            null,
+            defsoftware.HTML.makeElement(
+                "em",
+                null,
+                "Loading…"
+            )
+        ),
+        defsoftware.HTML.makeElement(
+            "h1",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: "https://gist.github.com/qerub" },
+                "My Gists"
+            )
+        ),
+        gistContainer = defsoftware.HTML.makeElement(
+            "p",
+            null,
+            defsoftware.HTML.makeElement(
+                "em",
+                null,
+                "Loading…"
+            )
+        )
+    );
     $(document.body).append(body);
-    var makeRepoListItem = (function (repo) { return li(link([strong(repo.name, ": "), repo.description], repo.html_url)); });
+    var makeRepoListItem = function makeRepoListItem(repo) {
+        return defsoftware.HTML.makeElement(
+            "li",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: repo.html_url },
+                defsoftware.HTML.makeElement(
+                    "strong",
+                    null,
+                    repo.name,
+                    ":"
+                ),
+                " ",
+                repo.description
+            )
+        );
+    };
     GitHubAPI("users/qerub/repos").then(function (data) {
-        var repos = data.filter(function (x) { return !x.fork; });
-        $(repoContainer).html(ul(repos.map(makeRepoListItem)));
-    }).fail(function (message) { return $(repoContainer).text("Error: " + message); });
-    var makeGistListItem = (function (gist) { return li(link(truncate(gist.description, 100), gist.html_url)); });
-    GitHubAPI("users/qerub/gists").then(function (data) { return $(gistContainer).html(ul(data.map(makeGistListItem))); }).fail(function (message) { return $(gistContainer).text("Error: " + message); });
+        var repos = data.filter(function (x) {
+            return !x.fork;
+        });
+        $(repoContainer).html(defsoftware.HTML.makeElement(
+            "ul",
+            null,
+            repos.map(makeRepoListItem)
+        ));
+    }).fail(function (message) {
+        return $(repoContainer).text("Error: " + message);
+    });
+    var makeGistListItem = function makeGistListItem(gist) {
+        return defsoftware.HTML.makeElement(
+            "li",
+            null,
+            defsoftware.HTML.makeElement(
+                "a",
+                { href: gist.html_url },
+                truncate(gist.description, 100)
+            )
+        );
+    };
+    GitHubAPI("users/qerub/gists").then(function (data) {
+        return $(gistContainer).html(defsoftware.HTML.makeElement(
+            "ul",
+            null,
+            data.map(makeGistListItem)
+        ));
+    }).fail(function (message) {
+        return $(gistContainer).text("Error: " + message);
+    });
 }
 $(main);
