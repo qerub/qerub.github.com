@@ -3,20 +3,20 @@
 
 /** @jsx defsoftware.HTML.makeElement */
 
-var GitHubAPI = (path: string): JQueryPromise<any> =>
+let GitHubAPI = (path: string): JQueryPromise<any> =>
   $.getJSON("https://api.github.com/"+path+"?callback=?").then(response =>
     (response.meta.status == 200)
       ? $.Deferred().resolve(response.data)
       : $.Deferred().reject (response.data.message)
   );
 
-var truncate = (s: string, n: number) =>
+let truncate = (s: string, n: number) =>
   (s.length > n) ? s.slice(0, n - 1) + "…" : s
 
 function main() {
-  var repoContainer, gistContainer;
+  let repoContainer, gistContainer;
 
-  var body = <div>
+  let body = <div>
     <h1><a href="http://qerub.se/">My Personal Website</a></h1>
     <h1><a href="https://www.ohloh.net/accounts/Qerub/positions">My Page on Ohloh</a></h1>
     <h1><a href="https://github.com/qerub">My GitHub Repositories</a></h1>
@@ -27,17 +27,17 @@ function main() {
     
   $(document.body).append(body);
   
-  var makeRepoListItem = (repo =>
+  let makeRepoListItem = (repo =>
     <li><a href={repo.html_url}><strong>{repo.name}:</strong> {repo.description}</a></li>);
   
   GitHubAPI("users/qerub/repos")
     .then(data => {
-      var repos = data.filter(x => !x.fork);
+      let repos = data.filter(x => !x.fork);
       $(repoContainer).html(<ul>{repos.map(makeRepoListItem)}</ul>);
     })
     .fail(message => $(repoContainer).text("Error: " + message));
   
-  var makeGistListItem = (gist =>
+  let makeGistListItem = (gist =>
     <li><a href={gist.html_url}>{truncate(gist.description, 100)}</a></li>);
   
   GitHubAPI("users/qerub/gists")
