@@ -1,12 +1,15 @@
 var gulp = require('gulp');
 
 gulp.task('compile-typescript', function () {
+  var sourcemaps = require('gulp-sourcemaps');
   var ts = require('gulp-typescript');
   var babel = require('gulp-babel');
   return gulp.src(['src/*.ts', 'src/*.tsx'])
+             .pipe(sourcemaps.init())
              .pipe(ts({typescript: require('typescript'), jsx: "preserve"}))
              .js
              .pipe(babel())
+             .pipe(sourcemaps.write('.'))
              .pipe(gulp.dest('dist'));
 });
 
