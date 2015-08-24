@@ -11,7 +11,7 @@ let GitHubAPI = (path: string): JQueryPromise<any> =>
   );
 
 let truncate = (s: string, n: number) =>
-  (s.length > n) ? s.slice(0, n - 1) + "…" : s
+  (s.length > n) ? s.slice(0, n - 1) + "…" : s;
 
 function main() {
   let repoContainer, gistContainer;
