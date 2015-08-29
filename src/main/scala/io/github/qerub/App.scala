@@ -26,6 +26,16 @@ object App extends js.JSApp {
         ).toSeq
       })
 
+    def gistsForUser(username: String): Future[Seq[Gist]] =
+      load(s"users/$username/gists").map(data => {
+        // TODO: Use some smart object mapper
+        data.asInstanceOf[js.Array[js.Dynamic]].map(r =>
+          Gist(
+            r.description.asInstanceOf[String],
+            r.html_url.asInstanceOf[String])
+        ).toSeq
+      })
+
     //noinspection ComparingUnrelatedTypes
     private def load(path: String): Future[js.Dynamic] =
       mkFuture(jQuery.getJSON(s"https://api.github.com/$path?callback=?")).flatMap(response =>
@@ -52,15 +62,21 @@ object App extends js.JSApp {
     private def render(page: Model.Page): ReactElement = {
       import japgolly.scalajs.react.vdom.all._
 
+      def renderFuture[T](future: Future[T])(sf: T => ReactTag): ReactTag = future.value match {
+        case None => p(em("Loading…"))
+        case Some(Success(value)) => sf(value)
+        case Some(Failure(exception)) => p(em("Error: ", exception.getMessage))
+      }
+
       div(
         h1(a(href := "https://github.com/qerub", "My GitHub Repositories")),
-        page.repositories.value match {
-          case None =>
-            p(em("Loading…"))
-          case Some(Success(repos)) =>
-            ul(repos.map(r => li(a(href := r.url, strong(r.name, ":"), " ", r.description))))
-          case Some(Failure(exception)) =>
-            p(em("Error: ", exception.getMessage))
+        renderFuture(page.repositories) { repos =>
+          ul(repos.map(r => li(a(href := r.url, strong(r.name, ":"), " ", r.description))))
+        },
+
+        h1(a(href := "https://gist.github.com/qerub", "My Gists")),
+        renderFuture(page.gists) { gists =>
+          ul(gists.map(r => li(a(href := r.url, truncate(r.description, 100)))))
         }
       ).render
     }
@@ -72,10 +88,11 @@ object App extends js.JSApp {
         .componentDidMount(scope => {
           val repos = GitHub.repositoriesForUser("qerub")
                             .map(repos => repos.filterNot(_.fork))
+          val gists = GitHub.gistsForUser("qerub")
 
-          scope.modState(s => s.copy(repositories = repos))
-
+          scope.setState(Model.Page(repos, gists))
           repos.onComplete(t => { scope.forceUpdate() })
+          gists.onComplete(t => { scope.forceUpdate() })
         })
         .build
   }
