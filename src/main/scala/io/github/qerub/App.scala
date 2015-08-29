@@ -22,7 +22,8 @@ object App extends js.JSApp {
             r.name.asInstanceOf[String],
             r.description.asInstanceOf[String],
             r.fork.asInstanceOf[Boolean],
-            r.html_url.asInstanceOf[String])
+            r.html_url.asInstanceOf[String]
+          )
         ).toSeq
       })
 
@@ -32,7 +33,8 @@ object App extends js.JSApp {
         data.asInstanceOf[js.Array[js.Dynamic]].map(r =>
           Gist(
             r.description.asInstanceOf[String],
-            r.html_url.asInstanceOf[String])
+            r.html_url.asInstanceOf[String]
+          )
         ).toSeq
       })
 
