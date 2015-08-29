@@ -69,6 +69,10 @@ object App extends js.JSApp {
       }
 
       div(
+        h1(a(href := "http://qerub.se/", "My Personal Website")),
+
+        h1(a(href := "https://www.ohloh.net/accounts/Qerub/positions", "My Page on Ohloh")),
+
         h1(a(href := "https://github.com/qerub", "My GitHub Repositories")),
         renderFuture(page.repositories) { repos =>
           ul(repos.map(r => li(a(href := r.url, strong(r.name, ":"), " ", r.description))))
