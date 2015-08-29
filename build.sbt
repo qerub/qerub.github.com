@@ -5,6 +5,7 @@ name := "qerub.github.io"
 scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
+  "org.scala-lang.modules" %% "scala-async" % "0.9.5",
   "be.doeraene" %%% "scalajs-jquery" % "0.8.1-qerub",
   "com.github.japgolly.scalajs-react" %%% "core" % "0.9.2"
 )

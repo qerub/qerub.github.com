@@ -4,6 +4,7 @@ import japgolly.scalajs.react.{React, ReactComponentB, ReactElement}
 import org.scalajs.dom.document
 import org.scalajs.jquery._
 
+import scala.async.Async.{async, await}
 import scala.concurrent.{Future, Promise}
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
 import scala.scalajs.js
@@ -39,11 +40,11 @@ object App extends js.JSApp {
       })
 
     //noinspection ComparingUnrelatedTypes
-    private def load(path: String): Future[js.Dynamic] =
-      mkFuture(jQuery.getJSON(s"https://api.github.com/$path?callback=?")).flatMap(response =>
-        if (response.meta.status == 200) Future.successful(response.data)
-        else Future.failed(new RuntimeException(response.data.message.asInstanceOf[String]))
-      )
+    private def load(path: String): Future[js.Dynamic] = async {
+      val response = await(mkFuture(jQuery.getJSON(s"https://api.github.com/$path?callback=?")))
+      if (response.meta.status != 200) throw new RuntimeException(response.data.message.asInstanceOf[String])
+      response.data
+    }
 
     private def mkFuture(xhr: JQueryXHR): Future[js.Dynamic] = {
       val p = Promise[js.Dynamic]()
