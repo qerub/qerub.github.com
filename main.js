@@ -30,8 +30,8 @@ function main() {
             null,
             defsoftware.HTML.makeElement(
                 "a",
-                { href: "https://www.ohloh.net/accounts/Qerub/positions" },
-                "My Page on Ohloh"
+                { href: "https://www.openhub.net/accounts/Qerub/positions" },
+                "My Page on Open HUB"
             )
         ),
         defsoftware.HTML.makeElement(
