@@ -18,7 +18,7 @@ function main() {
 
   let body = <div>
     <h1><a href="http://qerub.se/">My Personal Website</a></h1>
-    <h1><a href="https://www.ohloh.net/accounts/Qerub/positions">My Page on Ohloh</a></h1>
+    <h1><a href="https://www.openhub.net/accounts/Qerub/positions">My Page on Open HUB</a></h1>
     <h1><a href="https://github.com/qerub">My GitHub Repositories</a></h1>
     {repoContainer = <p><em>Loading…</em></p>}
     <h1><a href="https://gist.github.com/qerub">My Gists</a></h1>
