@@ -30,7 +30,7 @@ function main() {
             null,
             defsoftware.HTML.makeElement(
                 "a",
-                { href: "https://www.openhub.net/accounts/Qerub/positions" },
+                { href: "https://www.openhub.net/accounts/qerub/positions" },
                 "My Page on Open HUB"
             )
         ),
