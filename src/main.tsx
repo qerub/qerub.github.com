@@ -1,6 +1,3 @@
-/// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
-/// <reference path="defsoftware-utils.ts" />
-
 /** @jsx defsoftware.HTML.makeElement */
 
 let GitHubAPI = (path: string): JQueryPromise<any> =>

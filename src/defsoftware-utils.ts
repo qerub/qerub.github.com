@@ -1,6 +1,3 @@
-/// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
-/// <reference path="../DefinitelyTyped/sugar/sugar.d.ts" />
-
 module defsoftware {
   export module HTML {
     export function makeElement(tagName: string, ...args: any[]): JQuery {

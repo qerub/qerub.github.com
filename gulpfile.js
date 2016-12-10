@@ -3,12 +3,13 @@ var gulp = require("gulp");
 gulp.task("compile-typescript", function () {
   var sourcemaps = require("gulp-sourcemaps");
   var ts = require("gulp-typescript");
+  var tsProject = ts.createProject("tsconfig.json");
   var babel = require("gulp-babel");
-  return gulp.src(["src/*.ts", "src/*.tsx"])
+  return tsProject.src()
              .pipe(sourcemaps.init())
-             .pipe(ts({typescript: require("typescript"), jsx: "preserve"}))
+             .pipe(tsProject())
              .js
-             .pipe(babel())
+             .pipe(babel({presets: ["react"]}))
              .pipe(sourcemaps.write("."))
              .pipe(gulp.dest("dist"));
 });
