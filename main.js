@@ -1,14 +1,10 @@
-/// <reference path="../DefinitelyTyped/jquery/jquery.d.ts" />
-/// <reference path="defsoftware-utils.ts" />
 /** @jsx defsoftware.HTML.makeElement */
-"use strict";
-
-var GitHubAPI = function GitHubAPI(path) {
+var GitHubAPI = function (path) {
     return $.getJSON("https://api.github.com/" + path + "?callback=?").then(function (response) {
         return response.meta.status == 200 ? $.Deferred().resolve(response.data) : $.Deferred().reject(response.data.message);
     });
 };
-var truncate = function truncate(s, n) {
+var truncate = function (s, n) {
     return s.length > n ? s.slice(0, n - 1) + "…" : s;
 };
 function main() {
@@ -49,7 +45,7 @@ function main() {
             defsoftware.HTML.makeElement(
                 "em",
                 null,
-                "Loading…"
+                "Loading\u2026"
             )
         ),
         defsoftware.HTML.makeElement(
@@ -67,12 +63,12 @@ function main() {
             defsoftware.HTML.makeElement(
                 "em",
                 null,
-                "Loading…"
+                "Loading\u2026"
             )
         )
     );
     $(document.body).append(body);
-    var makeRepoListItem = function makeRepoListItem(repo) {
+    var makeRepoListItem = function (repo) {
         return defsoftware.HTML.makeElement(
             "li",
             null,
@@ -102,7 +98,7 @@ function main() {
     }).fail(function (message) {
         return $(repoContainer).text("Error: " + message);
     });
-    var makeGistListItem = function makeGistListItem(gist) {
+    var makeGistListItem = function (gist) {
         return defsoftware.HTML.makeElement(
             "li",
             null,
