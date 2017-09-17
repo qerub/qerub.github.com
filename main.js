@@ -27,7 +27,7 @@ function main() {
             defsoftware.HTML.makeElement(
                 "a",
                 { href: "https://www.openhub.net/accounts/qerub/positions" },
-                "My Page on Open HUB"
+                "My Page on Open Hub"
             )
         ),
         defsoftware.HTML.makeElement(
